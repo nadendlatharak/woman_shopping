@@ -1,5 +1,5 @@
 <template>
- <div class="products_display">
+ <div class="products_display" ref="container" @scroll="handleScroll">
     <div  v-for="item in productsList" :key="item.id">
         <div class="card">
             <img class="card-image" :src="item.image"/>
@@ -14,6 +14,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
     name: 'ListofProducts',
     // productsList: null,
@@ -32,10 +33,22 @@ export default {
    },
 
    methods: {
-  
-  }
+    handleScroll() {
+    //   const container = this.$refs.container;
+    //   if (container.scrollHeight - container.scrollTop === container.offsetHeight) {
+        this.loadMore();
+    //   }
+    },
 
-   
+    loadMore(){
+        this.loading = true
+        axios.get('https://pim.wforwoman.com/pim/pimresponse.php/?service=category&store=1&url_key=top-wear-kurtas&page=1&count=20&sort_by=&sort_dir=desc&filter=').
+    then(resp => {
+        this.productsList.push(resp.data.result.products)
+    })
+        this.loading = false
+    }
+    }
 
 
 
