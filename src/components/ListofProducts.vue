@@ -32,20 +32,24 @@ export default {
     })
    },
 
+   mounted(){
+    // this.loadMore()
+   },
+
    methods: {
     handleScroll() {
-    //   const container = this.$refs.container;
-    //   if (container.scrollHeight - container.scrollTop === container.offsetHeight) {
+      const container = this.$refs.container;
+      if (container.innerHeight + container.scrollTop === container.offsetHeight) {
         this.loadMore();
-    //   }
+      }
     },
 
     loadMore(){
         this.loading = true
         axios.get('https://pim.wforwoman.com/pim/pimresponse.php/?service=category&store=1&url_key=top-wear-kurtas&page=1&count=20&sort_by=&sort_dir=desc&filter=').
-    then(resp => {
-        this.productsList.push(resp.data.result.products)
-    })
+         then(resp => {
+          this.productsList = this.productsList.push(resp.data.result.products)
+        })
         this.loading = false
     }
     }
