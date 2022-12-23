@@ -1,17 +1,25 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld/>
+    <div class="body_section">
+      <SideNav class="side_nav"/>
+      <ListofProducts class="product_items" />
+    </div>
+ 
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import ListofProducts from './components/ListofProducts.vue';
+import SideNav from './components/SideNav.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    SideNav,
+    ListofProducts,
   }
 }
 </script>
@@ -23,6 +31,21 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
+
+.body_section {
+  height: 100vh-80px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+}
+
+.side_nav {
+  width: 1630px;
+  height: auto;
+  position: absolute;
+}
+
+
 </style>
